@@ -34,5 +34,4 @@ asciidoctor:
   attributes:
     - includedir=_includes
     - icons=font
-    - source-highlighter=highlightjs
-    - highlightjs-theme=tomorrow
+    - source-highlighter=coderay

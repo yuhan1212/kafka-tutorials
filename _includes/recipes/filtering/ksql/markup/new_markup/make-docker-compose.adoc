@@ -5,7 +5,7 @@
 Next, create the following `docker-compose.yml` file to obtain Confluent Platform:
 
 [role="snippet"]
-[source,shell]
+[source,yml]
 ----
 include::{includedir}/recipes/filtering/ksql/code/docker-compose.yml[]
 ----

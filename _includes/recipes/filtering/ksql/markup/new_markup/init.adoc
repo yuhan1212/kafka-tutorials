@@ -8,8 +8,7 @@ NOTE: this is just a note!
 [TIP]
 You should do what I say!
 
-==== this is a h4
-
+.This is include with caption
 [role="snippet"]
 [source,shell]
 ----

@@ -5,7 +5,7 @@
 And launch it by running:
 
 [role="snippet"]
-[source,shell]
+[source,bash]
 ----
 include::{includedir}/recipes/filtering/ksql/code/recipe-steps/dev/docker-compose-up.sh[] 
 ----
