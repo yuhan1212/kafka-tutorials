@@ -4,4 +4,5 @@ source "https://rubygems.org"
 
 gem "jekyll", "3.8.5"
 gem "jekyll-asciidoc", "2.1.1"
+gem 'coderay', '1.1.1' # code highlight for asciidoctor
 gem "s3_website", "3.4.0"
