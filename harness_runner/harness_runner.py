@@ -127,7 +127,7 @@ def run_steps(harness, temp_dir, sequence):
     finally:
         for name, proc in context["procs"].items():
             kill_async_process(proc)
-        time.sleep(5000)
+        time.sleep(5)
 
 def execute(file_name, temp_dir, sequence="dev, test, prod"):
     harness = load_file(file_name)
