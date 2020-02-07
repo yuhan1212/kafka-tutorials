@@ -1,0 +1,58 @@
+dev:
+  steps:
+    - title: Initialize the project
+      content:
+        - action: execute
+          file: tutorial-steps/dev/init.sh
+          render:
+            file: tutorials/connect-sink-elasticsearch/kstreams/markup/dev/init.adoc
+            
+    - title: Get Confluent Platform
+      content:
+        - change_directory: connect-sink-elasticsearch
+          action: make_file
+          file: docker-compose.yml
+          render:
+            file: tutorials/connect-sink-elasticsearch/kstreams/markup/dev/make-docker-compose.adoc
+
+        - action: execute_async
+          file: tutorial-steps/dev/docker-compose-up.sh
+          render:
+            file: tutorials/connect-sink-elasticsearch/kstreams/markup/dev/start-compose.adoc
+
+        - action: execute
+          file: tutorial-steps/dev/wait-for-containers.sh
+          render:
+            skip: true
+            
+
+test:
+
+prod:
+  steps:
+    - title: Create a production configuration file
+      content:
+        - action: make_file
+          file: configuration/prod.properties
+          render:
+            file: tutorials/connect-sink-elasticsearch/kstreams/markup/prod/make-prod-file.adoc
+
+    - title: Build a Docker image
+      content:
+        - action: execute
+          file: tutorial-steps/prod/build-image.sh
+          render:
+            file: tutorials/connect-sink-elasticsearch/kstreams/markup/prod/build-image.adoc
+
+    - title: Launch the container
+      content:
+        - action: skip
+          render:
+            file: tutorials/connect-sink-elasticsearch/kstreams/markup/prod/launch-container.adoc
+
+    - title: Clean up
+      content:
+        - action: execute
+          file: tutorial-steps/dev/clean-up.sh
+          render:
+            skip: true            

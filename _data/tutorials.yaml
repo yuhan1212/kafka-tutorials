@@ -197,3 +197,13 @@ flatten-nested-data:
     ksql: enabled
     kstreams: disabled
     kafka: disabled
+
+connect-sink-elasticsearch:
+  title: "Sink events into Elasticsearch"
+  slug: "/connect-sink-elasticsearch"
+  problem: "you have events in Kafka and wish to perform search and analytics with Elasticsearch"
+  introduction: "Consider a topic of user ratings for airline flights.  You wish to sink these records into Elasticsearch in order to perform data analytics and view records via Kibana"
+  status:
+    ksql: disabled
+    kstreams: enabled
+    kafka: disabled
