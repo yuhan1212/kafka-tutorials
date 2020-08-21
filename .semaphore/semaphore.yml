@@ -265,3 +265,8 @@ blocks:
             - make -C _includes/tutorials/kafka-producer-application/kafka/code tutorial
 
 
+
+        - name: Kafka Consuming and Producing AVRO messages with console tools tests
+          commands:
+            - make -C _includes/tutorials/console-consumer-producer-avro/kafka/code tutorial
+            
