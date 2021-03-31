@@ -8,7 +8,7 @@
 
 ////
 
-Using the terminal window you opened in step three, run the following command to start a console-producer:
+Run the following command to start a console-producer:
 
 +++++
 <pre class="snippet"><code class="shell">{% include_raw tutorials/kafka-consumer-application/kafka/code/tutorial-steps/dev/console-producer.sh %}</code></pre>

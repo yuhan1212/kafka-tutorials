@@ -1,4 +1,4 @@
-Then create a development configuration file at `configuration/dev.properties`:
+Let's augment our existing configuration file that was created after you provisioned a new ``ccloud-stack``. Do this by appending the following to the end of your configuration file.
 
 +++++
 <pre class="snippet"><code class="shell">{% include_raw tutorials/kafka-consumer-application/kafka/code/configuration/dev.properties %}</code></pre>

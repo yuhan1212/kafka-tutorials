@@ -7,22 +7,23 @@ dev:
           render:
             file: tutorials/kafka-consumer-application/kafka/markup/dev/init.adoc
 
-    - title: Get Confluent Platform
+    - title: Get Confluent Cloud and the CLI
       content:
-        - action: make_file
-          file: docker-compose.yml
+        - action: skip
           render:
-            file: tutorials/kafka-consumer-application/kafka/markup/dev/make-docker-compose.adoc
+            file: tutorials/ccloud-produce-consume/kafka/markup/dev/get-ccloud.adoc
 
-        - action: execute_async
-          file: tutorial-steps/dev/docker-compose-up.sh
+    - title: Provision a new ccloud-stack on Confluent Cloud
+      content:
+        - action: skip
           render:
-            file: tutorials/kafka-consumer-application/kafka/markup/dev/start-compose.adoc
+            file: tutorials/ccloud-produce-consume/kafka/markup/dev/setup-ccloud.adoc
 
-        - action: execute
-          file: tutorial-steps/dev/wait-for-containers.sh
+    - title: View cluster connection info
+      content:
+        - action: skip
           render:
-            skip: true
+            file: tutorials/ccloud-produce-consume/kafka/markup/dev/set-ccloud-config.adoc
 
     - title: Create a topic
       content:
@@ -30,7 +31,6 @@ dev:
           file: tutorial-steps/dev/harness-create-topic.sh
           render:
             file: tutorials/kafka-consumer-application/kafka/markup/dev/create-topic.adoc
-            
 
     - title: Configure the project
       content:
@@ -107,6 +107,11 @@ dev:
           render:
             file: tutorials/kafka-consumer-application/kafka/markup/dev/print-consumer-file-results.adoc
 
+    - title: Clean up your environment
+      content:
+        - action: skip
+          render:
+            file: tutorials/ccloud-produce-consume/kafka/markup/dev/clean-up.adoc
 
 test:
   steps:
@@ -171,10 +176,3 @@ prod:
           render:
             skip: true
 
-ccloud:
-  steps:
-    - title: Run your app to Confluent Cloud
-      content:
-        - action: skip
-          render:
-            file: shared/markup/ccloud/try-ccloud-properties.adoc
