@@ -7,6 +7,23 @@ dev:
           render:
             file: tutorials/kafka-consumer-application/kafka/markup/dev/init.adoc
 
+    - title: Get Confluent Platform
+      content:
+        - action: make_file
+          file: docker-compose.yml
+          render:
+            skip: true
+
+        - action: execute_async
+          file: tutorial-steps/dev/docker-compose-up.sh
+          render:
+            skip: true
+
+        - action: execute
+          file: tutorial-steps/dev/wait-for-containers.sh
+          render:
+            skip: true
+
     - title: Get Confluent Cloud and the CLI
       content:
         - action: skip
@@ -50,7 +67,7 @@ dev:
             file: tutorials/kafka-consumer-application/kafka/markup/dev/make-config-dir.adoc
 
         - action: make_file
-          file: configuration/dev.properties
+          file: configuration/harness.properties
           render:
             file: tutorials/kafka-consumer-application/kafka/markup/dev/make-dev-file.adoc
             
@@ -87,7 +104,7 @@ dev:
             file: tutorials/kafka-consumer-application/kafka/markup/dev/build-uberjar.adoc
 
         - action: execute_async
-          file: tutorial-steps/dev/run-dev-app.sh
+          file: tutorial-steps/dev/harness-run-dev-app.sh
           render:
             file: tutorials/kafka-consumer-application/kafka/markup/dev/run-dev-app.adoc
 
