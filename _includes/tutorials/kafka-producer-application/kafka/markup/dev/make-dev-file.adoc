@@ -1,10 +1,10 @@
-Then create a development file at `configuration/dev.properties`:
+Let's augment our existing configuration file that was created after you provisioned a new ``ccloud-stack``. Do this by appending the following to the end of your configuration file.
 
 +++++
 <pre class="snippet"><code class="shell">{% include_raw tutorials/kafka-producer-application/kafka/code/configuration/dev.properties %}</code></pre>
 +++++
 
-Let's do a quick walkthrough of some of the producer properties.
+Let's do a quick walkthrough of some of the producer properties above.
 
 https://kafka.apache.org/documentation/#key.serializer[key.serializer] - The serializer the `KafkaProducer` will use to serialize the key.
 

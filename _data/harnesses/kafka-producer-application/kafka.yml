@@ -7,22 +7,30 @@ dev:
           render:
             file: tutorials/kafka-producer-application/kafka/markup/dev/init.adoc
 
-    - title: Get Confluent Platform
+    - title: Get Confluent Cloud and the CLI
+      content:
+        - action: skip
+          render:
+            file: tutorials/ccloud-produce-consume/kafka/markup/dev/get-ccloud.adoc
+
+    - title: Provision a new ccloud-stack on Confluent Cloud
+      content:
+        - action: skip
+          render:
+            file: tutorials/ccloud-produce-consume/kafka/markup/dev/setup-ccloud.adoc
+
+    - title: View cluster connection info
+      content:
+        - action: skip
+          render:
+            file: tutorials/ccloud-produce-consume/kafka/markup/dev/set-ccloud-config.adoc
+
+    - title: Add application and producer properties
       content:
         - action: make_file
-          file: docker-compose.yml
+          file: configuration/dev.properties
           render:
-            file: tutorials/kafka-producer-application/kafka/markup/dev/make-docker-compose.adoc
-
-        - action: execute_async
-          file: tutorial-steps/dev/docker-compose-up.sh
-          render:
-            file: tutorials/kafka-producer-application/kafka/markup/dev/start-compose.adoc
-
-        - action: execute
-          file: tutorial-steps/dev/wait-for-containers.sh
-          render:
-            skip: true
+            file: tutorials/kafka-producer-application/kafka/markup/dev/make-dev-file.adoc
 
     - title: Create a topic
       content:
@@ -42,18 +50,6 @@ dev:
           file: tutorial-steps/dev/gradle-wrapper.sh
           render:
             file: tutorials/kafka-producer-application/kafka/markup/dev/make-gradle-wrapper.adoc
-
-        - action: execute
-          file: tutorial-steps/dev/make-configuration-dir.sh
-          render:
-            file: tutorials/kafka-producer-application/kafka/markup/dev/make-config-dir.adoc
-
-    - title: Add application and producer properties
-      content:
-        - action: make_file
-          file: configuration/dev.properties
-          render:
-            file: tutorials/kafka-producer-application/kafka/markup/dev/make-dev-file.adoc
 
     - title: Create the KafkaProducer application
       content:
@@ -100,6 +96,11 @@ dev:
           render:
             skip: true
 
+    - title: Clean up your environment
+      content:
+        - action: skip
+          render:
+            file: tutorials/ccloud-produce-consume/kafka/markup/dev/clean-up.adoc
 test:
   steps:
     - title: Create a test configuration file
@@ -155,13 +156,5 @@ prod:
           render:
             skip: true
 
-
-ccloud:
-  steps:
-    - title: Run your app to Confluent Cloud
-      content:
-        - action: skip
-          render:
-            file: shared/markup/ccloud/try-ccloud-properties.adoc
 
 
