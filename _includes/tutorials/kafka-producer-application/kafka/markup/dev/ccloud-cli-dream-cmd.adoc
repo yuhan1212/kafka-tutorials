@@ -1,0 +1,16 @@
+Use the Confluent Cloud CLI to create a test environment, cluster, and user account with global access with the command below:
+```
+ccloud this-command-doesnt-exist fake-create-fancy-test-cluster-not-real-command
+```
+After running the command above, you should see output similar to the following (but actually you'll see nothing because above isn't real and requires a product enhancement):
+```
+Creating Confluent Cloud stack for service account demo-app-1234, ID: 12345.
+Set Kafka cluster "lkc-xyz123" as the active cluster for environment "env-abc123".
+
+Waiting up to 720 seconds for Confluent Cloud cluster to be ready and for credentials to propagate
+.....
+Sleeping an additional 80 seconds to ensure propagation of all metadata
+Set API Key "ABC123ABC123" as the active API key for "lkc-123abc".
+
+Client configuration file saved to: stack-configs/java-service-account-12345.config
+```

@@ -17,7 +17,7 @@ dev:
       content:
         - action: skip
           render:
-            file: tutorials/ccloud-produce-consume/kafka/markup/dev/setup-ccloud.adoc
+            file: tutorials/kafka-producer-application/kafka/markup/dev/ccloud-cli-dream-cmd.adoc
 
     - title: View cluster connection info
       content:
