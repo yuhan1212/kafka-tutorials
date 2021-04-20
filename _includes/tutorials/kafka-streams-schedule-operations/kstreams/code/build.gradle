@@ -41,8 +41,13 @@ dependencies {
         // the clear method so we need AK kafka-clients
         exclude group:'org.apache.kafka', module: 'kafka-clients'
     }
+<<<<<<< HEAD
     implementation "org.apache.kafka:kafka-clients:2.7.0"
     testImplementation "org.apache.kafka:kafka-streams-test-utils:2.7.0"
+=======
+    implementation "org.apache.kafka:kafka-clients:2.6.0"
+    testImplementation "org.apache.kafka:kafka-streams-test-utils:2.6.0"
+>>>>>>> release
     testImplementation "junit:junit:4.13.2"
     testImplementation 'org.hamcrest:hamcrest:2.2'
 }

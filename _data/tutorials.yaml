@@ -364,10 +364,17 @@ kafka-consumer-application:
     confluent: enabled
 
 produce-consume-lang:
+<<<<<<< HEAD
   title: "Produce and Consume Records in non-Java languages"
   meta-description: "Produce and Consume events from Apache Kafka in non-Java languages"
   slug: "/produce-consume-lang"
   question: "How can I produce and consume events from Kafka using various programming languages, other than Java? (There are many languages with Kafka client bindings—some are shown below, other language examples are available in <a href=\"https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/clients-all-examples.html\">documentation</a>)"
+=======
+  title: "Produce and Consume Records in multiple languages"
+  meta-description: "Produce and Consume events from Apache Kafka in multiple languages"
+  slug: "/produce-consume-lang"
+  question: "How can I produce and consume events from Kafka using a programming language other than Java?"
+>>>>>>> release
   introduction: "You want to enrich and expose a list of books from a library. You have to produce an event for each book acquisition (title, editor, release ...), and consume back the same events to serve the book collection over HTTP."
   status:
     c: disabled
@@ -445,6 +452,20 @@ count-messages:
   introduction: "It can be useful to know how many messages there are currently in a topic. However, you cannot calculate this straight from the offsets, because you need to take into account the topic's retention policy, log compaction, and potential duplicate messages. In this example we'll take a topic of pageview data and see how we can count all of the messages in the topic."
   status:
     ksql: enabled
+<<<<<<< HEAD
+=======
+    kafka: enabled
+
+ccloud-produce-consume:
+  title: "How to produce and consume records from Confluent Cloud using ccloud CLI"
+  meta-description: "Learn how to produce and consume records from Confluent Cloud using ccloud CLI"
+  slug: "/ccloud-produce-consume"
+  question: "How do I use the ccloud CLI to produce and consume records from a Confluent Cloud topic?"
+  introduction: "In this tutorial you learn how to use the ccloud CLI to produce and consume records from a Kafka topic in <a href=\"https://www.confluent.io/confluent-cloud/tryfree/\">Confluent Cloud</a>. This can help you build and debug your Confluent Cloud based event streaming applications."
+  status:
+    ksql: disabled
+    kstreams: disabled
+>>>>>>> release
     kafka: enabled
 
 kafka-streams-schedule-operations:

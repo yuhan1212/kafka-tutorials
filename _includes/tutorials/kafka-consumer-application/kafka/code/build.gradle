@@ -31,7 +31,11 @@ apply plugin: "com.github.johnrengelman.shadow"
 
 dependencies {
     implementation "org.slf4j:slf4j-simple:1.7.30"
+<<<<<<< HEAD
     implementation "org.apache.kafka:kafka-streams:2.7.0"
+=======
+    implementation "org.apache.kafka:kafka-streams:2.5.0"
+>>>>>>> release
     testImplementation "junit:junit:4.13.2"
     testImplementation 'org.hamcrest:hamcrest:2.2'
 }

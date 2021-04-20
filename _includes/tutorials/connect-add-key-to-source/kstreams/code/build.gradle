@@ -38,7 +38,11 @@ dependencies {
   implementation "io.confluent:kafka-streams-avro-serde:6.1.0"
   implementation 'com.google.code.gson:gson:2.8.6'
 
+<<<<<<< HEAD
   testImplementation "org.apache.kafka:kafka-streams-test-utils:2.7.0"
+=======
+  testImplementation "org.apache.kafka:kafka-streams-test-utils:2.5.1"
+>>>>>>> release
   testImplementation 'junit:junit:4.13.2'
 }
 
