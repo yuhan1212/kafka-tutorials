@@ -29,30 +29,18 @@ import org.apache.kafka.streams.kstream.Produced;
 import org.apache.kafka.streams.kstream.StreamJoined;
 
 public class NamingChangelogAndRepartitionTopics {
-
-
-  public Properties buildStreamsProperties(Properties envProps) {
-    Properties props = new Properties();
-
-    props.put(StreamsConfig.APPLICATION_ID_CONFIG, envProps.getProperty("application.id"));
-    props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, envProps.getProperty("bootstrap.servers"));
-    props.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getPath());
-    props.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
-
-    return props;
-  }
-
-  public Topology buildTopology(Properties envProps) {
+  
+  public Topology buildTopology(Properties allProps) {
     final StreamsBuilder builder = new StreamsBuilder();
-    final String inputTopic = envProps.getProperty("input.topic.name");
-    final String outputTopic = envProps.getProperty("output.topic.name");
-    final String joinTopic = envProps.getProperty("join.topic.name");
+    final String inputTopic = allProps.getProperty("input.topic.name");
+    final String outputTopic = allProps.getProperty("output.topic.name");
+    final String joinTopic = allProps.getProperty("join.topic.name");
 
     final Serde<Long> longSerde = Serdes.Long();
     final Serde<String> stringSerde = Serdes.String();
 
-    final boolean addFilter = Boolean.parseBoolean(envProps.getProperty("add.filter"));
-    final boolean addNames = Boolean.parseBoolean(envProps.getProperty("add.names"));
+    final boolean addFilter = Boolean.parseBoolean(allProps.getProperty("add.filter"));
+    final boolean addNames = Boolean.parseBoolean(allProps.getProperty("add.names"));
 
     KStream<Long, String> inputStream = builder.stream(inputTopic, Consumed.with(longSerde, stringSerde))
                                                   .selectKey((k, v) -> Long.parseLong(v.substring(0, 1)));
@@ -85,43 +73,40 @@ public class NamingChangelogAndRepartitionTopics {
     joinedStream.to(joinTopic, Produced.with(longSerde, stringSerde));
     countStream.map((k,v) -> KeyValue.pair(k.toString(), v.toString())).to(outputTopic, Produced.with(stringSerde, stringSerde));
 
-
     return builder.build();
   }
 
-  public void createTopics(final Properties envProps) {
-    final Map<String, Object> config = new HashMap<>();
-    config.put("bootstrap.servers", envProps.getProperty("bootstrap.servers"));
-    try (final AdminClient client = AdminClient.create(config)) {
+  public void createTopics(final Properties allProps) {
+    try (final AdminClient client = AdminClient.create(allProps)) {
 
       final List<NewTopic> topics = new ArrayList<>();
 
       topics.add(new NewTopic(
-          envProps.getProperty("input.topic.name"),
-          Integer.parseInt(envProps.getProperty("input.topic.partitions")),
-          Short.parseShort(envProps.getProperty("input.topic.replication.factor"))));
+          allProps.getProperty("input.topic.name"),
+          Integer.parseInt(allProps.getProperty("input.topic.partitions")),
+          Short.parseShort(allProps.getProperty("input.topic.replication.factor"))));
 
       topics.add(new NewTopic(
-          envProps.getProperty("output.topic.name"),
-          Integer.parseInt(envProps.getProperty("output.topic.partitions")),
-          Short.parseShort(envProps.getProperty("output.topic.replication.factor"))));
+          allProps.getProperty("output.topic.name"),
+          Integer.parseInt(allProps.getProperty("output.topic.partitions")),
+          Short.parseShort(allProps.getProperty("output.topic.replication.factor"))));
 
       topics.add(new NewTopic(
-          envProps.getProperty("join.topic.name"),
-          Integer.parseInt(envProps.getProperty("join.topic.partitions")),
-          Short.parseShort(envProps.getProperty("join.topic.replication.factor"))));
+          allProps.getProperty("join.topic.name"),
+          Integer.parseInt(allProps.getProperty("join.topic.partitions")),
+          Short.parseShort(allProps.getProperty("join.topic.replication.factor"))));
 
       client.createTopics(topics);
     }
   }
 
   public Properties loadEnvProperties(String fileName) throws IOException {
-    final Properties envProps = new Properties();
+    final Properties allProps = new Properties();
     final FileInputStream input = new FileInputStream(fileName);
-    envProps.load(input);
+    allProps.load(input);
     input.close();
 
-    return envProps;
+    return allProps;
   }
 
   public static void main(String[] args) throws Exception {
@@ -132,26 +117,27 @@ public class NamingChangelogAndRepartitionTopics {
     }
 
     final NamingChangelogAndRepartitionTopics instance = new NamingChangelogAndRepartitionTopics();
-    final Properties envProps = instance.loadEnvProperties(args[0]);
+    final Properties allProps = instance.loadEnvProperties(args[0]);
+    allProps.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getPath());
+    allProps.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
     if (args.length > 1 ) {
       final String namesAndFilter = args[1];
 
       if (namesAndFilter.contains("filter")) {
-        envProps.put("add.filter", "true");
+        allProps.put("add.filter", "true");
       }
 
       if (namesAndFilter.contains("names")) {
-        envProps.put("add.names", "true");
+        allProps.put("add.names", "true");
       }
     }
 
     final CountDownLatch latch = new CountDownLatch(1);
-    final Properties streamProps = instance.buildStreamsProperties(envProps);
-    final Topology topology = instance.buildTopology(envProps);
+    final Topology topology = instance.buildTopology(allProps);
 
-    instance.createTopics(envProps);
+    instance.createTopics(allProps);
 
-    final KafkaStreams streams = new KafkaStreams(topology, streamProps);
+    final KafkaStreams streams = new KafkaStreams(topology, allProps);
 
     // Attach shutdown handler to catch Control-C.
     Runtime.getRuntime().addShutdownHook(new Thread("streams-shutdown-hook") {

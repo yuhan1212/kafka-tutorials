@@ -276,6 +276,7 @@ naming-changelog-repartition-topics:
     ksql: disabled
     kstreams: enabled
     kafka: disabled
+    confluent: enabled
 
 cogrouping-streams:
   title: "How to combine stream aggregates together in a single larger object"
